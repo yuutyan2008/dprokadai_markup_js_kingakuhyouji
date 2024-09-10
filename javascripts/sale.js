@@ -28,7 +28,8 @@ let data = [//dataは商品在庫データ。ここから一致する商品を�
     name: "スペシャルブレンド500g",
     price: 1200,
   },
-];
+]
+
 /// データベースの代わりに連想配列を定義する
 
 
@@ -49,14 +50,16 @@ function add() {
 
   /// 商品在庫のdataからproduct_idをキーにして 名前と価格を取得、
   const found = data.find(function (elem) {
-    if (elem.id == product_id) {//商品dataと入力フォームから取得したproduct_idが一致するか確認、その時のelemをfoundに格納
-      return true;
-    } else {
-      return false;
-    }
+    // debugger
+    return elem.id === parseInt(product_id) //商品dataと入力フォームから取得したproduct_idが一致するか確認、その時のelemをfoundに格納
+      // return true;
+    // } else {
+    //   return false;
+    // }
+
   });
 //商品在庫のdataから商品を選び、一時的にpurchaseに格納
-  let purchase = {
+  const purchase = {
     name: found.name,
     price: parseInt(found.price),//整数に変換
     number: parseInt(number),
@@ -87,6 +90,8 @@ function add() {
   numberElement.value = "";
 }
 
+
+
 // 確定した小計金額を返却してくれる
 function subtotal() {
   let sum = 0;
@@ -96,6 +101,7 @@ function subtotal() {
   }
   return sum;
 }
+
 
 //送料の計算
 function calcPostageFromPurchase(sum) {
@@ -107,6 +113,7 @@ function calcPostageFromPurchase(sum) {
     return 250;
   }
 }
+
 
 function calc() {
   const sum = subtotal();
